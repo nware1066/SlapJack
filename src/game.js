@@ -9,12 +9,19 @@ class Game {
   // when Player instantiates assign keys for deal and slap (or place this in function that validates this)
 
   dealCards() {
-    // for loop to send card from main deck to player decks until deck.length = 0
-  }
 
+  }
+  
   shuffleCards() {
     // use Fisher-Yates algorithm to shuffle deck
-  }
+    var i = arr.length, j, temp;
+    while(--i > 0){
+      j = Math.floor(Math.random()*(i+1));
+      temp = arr[j];
+      arr[j] = arr[i];
+      arr[i] = temp;
+    }
+    console.log(arr);  }
 
   changePlayer() {
     // change currentPlayer after playCard
