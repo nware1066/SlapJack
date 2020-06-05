@@ -6,10 +6,10 @@ class Player {
   }
 
   playCard() {
-    // move index[0] from hand to centerPile
+    // move handArray.length-1 from hand to centerPile
   }
 
   saveWins(){
-    // add win to local storage
+    // increment and add win to local storage
   }
 }

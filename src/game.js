@@ -3,18 +3,20 @@ class Game {
     this.player1 = player1;
     this.player2 = player2;
     this.currentPlayer = currentPlayer;
-    this.centerPile = centerPile;
+    this.centerPile = [];
   }
+
+  // when Player instantiates assign keys for deal and slap (or place this in function that validates this)
 
   dealCards() {
     // for loop to send card from main deck to player decks until deck.length = 0
   }
 
   shuffleCards() {
-    // randomized card order within array
+    // use Fisher-Yates algorithm to shuffle deck
   }
 
-  currentPlayer() {
+  changePlayer() {
     // change currentPlayer after playCard
   }
 
