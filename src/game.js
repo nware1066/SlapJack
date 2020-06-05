@@ -1,20 +1,29 @@
 class Game {
-  constructor(player1, player2) {
+  constructor(player1, player2, currentPlayer) {
     this.player1 = player1;
     this.player2 = player2;
     this.currentPlayer = currentPlayer;
+    this.cardDeck = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9];
     this.centerPile = [];
   }
 
   // when Player instantiates assign keys for deal and slap (or place this in function that validates this)
 
-  dealCards() {
-    // for loop to send card from main deck to player decks until deck.length = 0
-  }
 
   shuffleCards() {
     // use Fisher-Yates algorithm to shuffle deck
+    var i = this.cardDeck.length, j, temp;
+    while(--i > 0){
+      j = Math.floor(Math.random()*(i+1));
+      temp = this.cardDeck[j];
+      this.cardDeck[j] = this.cardDeck[i];
+      this.cardDeck[i] = temp;
+    }
   }
+
+  dealCards() {
+    this.cardDeck.slice(0, 19);
+}
 
   changePlayer() {
     // change currentPlayer after playCard
