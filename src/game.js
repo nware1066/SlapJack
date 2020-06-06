@@ -1,8 +1,8 @@
 class Game {
   constructor(currentPlayer) {
-    this.player1 = new Player();
-    this.player2 = new Player();
-    this.currentPlayer = currentPlayer || this.player1;
+    this.player1 = new Player({id: 42, wins: 0, hand: []});
+    this.player2 = new Player({id: 13, wins: 0, hand: []});
+    this.currentPlayer = this.player1;
     this.cardDeck = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9];
     this.centerPile = [];
   }
@@ -27,7 +27,7 @@ class Game {
 }
 
   changePlayer() {
-    if (this.currentPlayer = this.player1) {
+    if (this.currentPlayer === this.player1) {
       this.currentPlayer = this.player2;
     } else {
       this.currentPlayer = this.player1;
