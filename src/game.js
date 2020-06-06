@@ -27,7 +27,11 @@ class Game {
 }
 
   changePlayer() {
-  
+    if (this.currentPlayer = this.player1) {
+      this.currentPlayer = this.player2;
+    } else {
+      this.currentPlayer = this.player1;
+    }
     // change currentPlayer after playCard
   }
 
