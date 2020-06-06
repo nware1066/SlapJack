@@ -1,8 +1,8 @@
 class Game {
-  constructor(player1, player2, currentPlayer) {
-    this.player1 = player1;
-    this.player2 = player2;
-    this.currentPlayer = currentPlayer;
+  constructor(currentPlayer) {
+    this.player1 = new Player();
+    this.player2 = new Player();
+    this.currentPlayer = currentPlayer || this.player1;
     this.cardDeck = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9];
     this.centerPile = [];
   }
@@ -22,10 +22,12 @@ class Game {
   }
 
   dealCards() {
-    this.cardDeck.slice(0, 19);
+    this.player1.hand = this.cardDeck.slice(0, 18);
+    this.player2.hand = this.cardDeck.slice(18, 40);
 }
 
   changePlayer() {
+  
     // change currentPlayer after playCard
   }
 
