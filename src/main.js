@@ -3,11 +3,6 @@ var playedCard;
 newGame.shuffleCards(newGame.cardDeck);
 newGame.dealCards();
 
-// function playerTurn() {
-//   newGame.currentPlayer.pickCard();
-//   newGame.takeTurn();
-//   return newGame.centerPile;
-// }
 
 // window.addEventListener()
 // var playedCard = newGame.currentPlayer.pickCard();

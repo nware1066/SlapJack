@@ -26,18 +26,20 @@ class Game {
     this.player2.hand = this.cardDeck.slice(18, 40);
   }
 
+  playerTurn() {
+    this.currentPlayer.pickCard();
+    this.placeCard();
+    this.changePlayer();
+    return newGame.centerPile;
+  }
 
   placeCard() {
     this.centerPile.unshift(playedCard);
-     return this.centerPile;
+     // return this.centerPile;
   }
 
   changePlayer() {
-    if (this.currentPlayer === this.player1) {
-      this.currentPlayer = this.player2;
-    } else {
-      this.currentPlayer = this.player1;
-    }
+    this.currentPlayer = this.currentPlayer === this.player1 ? this.player2 : this.player1;
     // change currentPlayer after playCard
   }
 
@@ -52,10 +54,12 @@ class Game {
           this.currentPlayer.hand = this.currentPlayer.hand.concat(this.centerPile);
           newGame.shuffleCards(this.currentPlayer.hand);
           this.centerPile = [];
-          // now shuffle this
+
+          // this cannot be the currentPlayer, it needs to be linked to the keydown
+        // } else {
+        //   var penaltyCard = this.currentPlayer.hand.pop();
+        //   opponentHand.push(penaltyCard)
         }
-    // if conditional to determine if slap is valid and move centerPile to appropriate players deck
-    // or remove index[0] of players deck and place at the back of opponent's deck
   }
 
   determineWin() {
