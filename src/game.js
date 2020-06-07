@@ -26,11 +26,13 @@ class Game {
     this.player2.hand = this.cardDeck.slice(18, 40);
   }
 
-  playerTurn() {
-    this.currentPlayer.pickCard();
-    this.placeCard();
-    this.changePlayer();
-    return newGame.centerPile;
+  playerTurn(player) {
+    if (this[player] === this.currentPlayer) {
+      this.currentPlayer.pickCard();
+      this.placeCard();
+      this.changePlayer();
+      return newGame.centerPile;
+    }
   }
 
   placeCard() {
