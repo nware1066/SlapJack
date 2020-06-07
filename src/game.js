@@ -63,11 +63,6 @@ class Game {
     // change currentPlayer after playCard
   }
 
-  slapCard() {
-    // this will happen in main.js ??
-    // recognize slap keydown for individual player, invoke validating function
-  }
-
   validateSlap(player) {
     var card1 = this.centerPile[0].value;
     var card2 = this.centerPile[1].value;

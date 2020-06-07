@@ -26,7 +26,15 @@ function handleKeydown(event) {
 }
 
 function updateDisplay() {
-  const body = document.querySelector('body');
+  var monitor = document.querySelector('.monitor');
+  var topCard = newGame.centerPile[0];
+  var centerCardImage = document.querySelector('.center-pile .card-img');
+  if (topCard) {
+    centerCardImage.src = `./assets/${topCard.src}.png`;
+  } else {
+    centerCardImage.src = `./assets/blank.png`;
+  }
+
   const template = `
     <h3>Game</h3>
     <p>Current Player: ${newGame.currentPlayer.id}</p>
@@ -42,7 +50,7 @@ function updateDisplay() {
     <p>Wins: ${newGame.player2.wins}</p>
     <hr/>
   `;
-  body.insertAdjacentHTML('afterbegin', template);
+  monitor.insertAdjacentHTML('afterbegin', template);
 }
 // var playedCard = newGame.currentPlayer.pickCard();
 // newGame.placeCard(playedCard);
