@@ -1,8 +1,8 @@
 
 class Game {
   constructor() {
-    this.player1 = new Player({id: 42, wins: 0, hand: []});
-    this.player2 = new Player({id: 13, wins: 0, hand: []});
+    this.player1 = new Player(1);
+    this.player2 = new Player(2);
     this.currentPlayer = this.player1;
     this.cardDeck = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9];
     this.centerPile = [];
@@ -46,15 +46,15 @@ class Game {
   }
 
   slapCard() {
-    // this will happen in main.js
+    // this will happen in main.js ??
     // recognize slap keydown for individual player, invoke validating function
   }
 
-  validateSlap() {
+  validateSlap(player) {
       if (this.centerPile[0] === 11 || this.centerPile[0] == this.centerPile[1] ||
         this.centerPile[0] == this.centerPile[2]) {
-          this.currentPlayer.hand = this.currentPlayer.hand.concat(this.centerPile);
-          newGame.shuffleCards(this.currentPlayer.hand);
+          this[player].hand = this[player].hand.concat(this.centerPile);
+          newGame.shuffleCards(this[player].hand);
           this.centerPile = [];
 
           // this cannot be the currentPlayer, it needs to be linked to the keydown

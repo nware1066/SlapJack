@@ -1,5 +1,5 @@
 class Player {
-  constructor(id, wins) {
+  constructor(id) {
     this.id = id;
     this.wins = 0;
     this.hand = [];
