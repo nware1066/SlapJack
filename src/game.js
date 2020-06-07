@@ -4,11 +4,29 @@ class Game {
     this.player1 = new Player(1);
     this.player2 = new Player(2);
     this.currentPlayer = this.player1;
-    this.cardDeck = [1,1,1,1,2,2,2,2,3,3,3,3,4,4,4,4,5,5,5,5,6,6,6,6,7,7,7,7,8,8,8,8,9,9,9,9];
+    this.cardDeck = this.createDeck();
     this.centerPile = [];
   }
 
   // when Player instantiates assign keys for deal and slap (or place this in function that validates this)
+  createDeck() {
+    var deck = [];
+    var suitColors = ["red", "gold", "green", "blue"];
+    for (var i = 0; i <= 3; i++) {
+      var newSuit = this.createSuit(suitColors[i]);
+      deck = deck.concat(newSuit);
+    }
+    return deck;
+  }
+
+  createSuit(suitColor) {
+    var suit = [];
+    for (var i = 1; i <= 13; i++) {
+      var newCard = new Card(i, suitColor);
+      suit.push(newCard);
+    }
+    return suit;
+  }
 
   shuffleCards(arr) {
     // use Fisher-Yates algorithm to shuffle deck
@@ -22,8 +40,8 @@ class Game {
   }
 
   dealCards() {
-    this.player1.hand = this.cardDeck.slice(0, 18);
-    this.player2.hand = this.cardDeck.slice(18, 40);
+    this.player1.hand = this.cardDeck.slice(0, 26);
+    this.player2.hand = this.cardDeck.slice(26, 60);
   }
 
   playerTurn(player) {
@@ -51,8 +69,11 @@ class Game {
   }
 
   validateSlap(player) {
-      if (this.centerPile[0] === 11 || this.centerPile[0] == this.centerPile[1] ||
-        this.centerPile[0] == this.centerPile[2]) {
+    var card1 = this.centerPile[0].value;
+    var card2 = this.centerPile[1].value;
+    var card3 = this.centerPile[2].value;
+      if (card1 === 11 || card1 == card2 ||
+        card1 == card3) {
           this[player].hand = this[player].hand.concat(this.centerPile);
           newGame.shuffleCards(this[player].hand);
           this.centerPile = [];
