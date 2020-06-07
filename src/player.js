@@ -6,7 +6,7 @@ class Player {
   }
 
   pickCard() {
-    playedCard = this.hand.pop();
+    var playedCard = this.hand.pop();
     return playedCard;
   }
 

@@ -4,6 +4,7 @@ class Game {
     this.player1 = new Player(1);
     this.player2 = new Player(2);
     this.currentPlayer = this.player1;
+    this.opponent = this.player2;
     this.cardDeck = this.createDeck();
     this.centerPile = [];
   }
@@ -42,43 +43,44 @@ class Game {
   dealCards() {
     this.player1.hand = this.cardDeck.slice(0, 26);
     this.player2.hand = this.cardDeck.slice(26, 60);
+    console.log(this.player1.hand)
   }
 
   playerTurn(player) {
     if (this[player] === this.currentPlayer) {
-      this.currentPlayer.pickCard();
-      this.placeCard();
+      var playedCard = this.currentPlayer.pickCard();
+      this.placeCard(playedCard);
       this.changePlayer();
-      return newGame.centerPile;
     }
   }
 
-  placeCard() {
-    this.centerPile.unshift(playedCard);
-     // return this.centerPile;
+  placeCard(card) {
+    console.log(card);
+    this.centerPile.unshift(card);
   }
 
   changePlayer() {
-    this.currentPlayer = this.currentPlayer === this.player1 ? this.player2 : this.player1;
+    var opponent = this.opponent;
+    this.opponent = this.currentPlayer;
+    this.currentPlayer = opponent;
     // change currentPlayer after playCard
   }
 
   validateSlap(player) {
-    var card1 = this.centerPile[0].value;
-    var card2 = this.centerPile[1].value;
-    var card3 = this.centerPile[2].value;
-      if (card1 === 11 || card1 == card2 ||
-        card1 == card3) {
-          this[player].hand = this[player].hand.concat(this.centerPile);
-          newGame.shuffleCards(this[player].hand);
-          this.centerPile = [];
-
-          // this cannot be the currentPlayer, it needs to be linked to the keydown
-        // } else {
-        //   var penaltyCard = this.currentPlayer.hand.pop();
-        //   opponentHand.push(penaltyCard)
-        }
+      var card1 = this.centerPile[0] ? this.centerPile[0].value : "no card1";
+      var card2 = this.centerPile[1] ? this.centerPile[1].value : "no card2";
+      var card3 = this.centerPile[2] ? this.centerPile[2].value : "no card3";
+      if (card1 === 11 || card1 == card2 || card1 == card3) {
+        this[player].hand = this[player].hand.concat(this.centerPile);
+        newGame.shuffleCards(this[player].hand);
+        this.centerPile = [];
+      } else {
+        var otherPlayer = this[player].id === 1 ? this.player2 : this.player1;
+        var penaltyCard = this[player].hand.pop();
+        otherPlayer.hand.push(penaltyCard);
+      }
   }
+
 
   determineWin() {
     // if playerHand.length === 0, opponent reveals cards one at a time.

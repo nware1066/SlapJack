@@ -1,5 +1,5 @@
 var newGame = new Game;
-var playedCard;
+// var playedCard;
 newGame.shuffleCards(newGame.cardDeck);
 newGame.dealCards();
 
