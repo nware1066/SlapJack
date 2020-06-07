@@ -5,9 +5,9 @@ class Player {
     this.hand = [];
   }
 
-  playCard() {
-
-    // move handArray.length-1 from hand to centerPile
+  pickCard() {
+    playedCard = this.hand.pop();
+    return playedCard;
   }
 
   saveWins(){

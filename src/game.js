@@ -1,5 +1,6 @@
+
 class Game {
-  constructor(currentPlayer) {
+  constructor() {
     this.player1 = new Player({id: 42, wins: 0, hand: []});
     this.player2 = new Player({id: 13, wins: 0, hand: []});
     this.currentPlayer = this.player1;
@@ -9,22 +10,27 @@ class Game {
 
   // when Player instantiates assign keys for deal and slap (or place this in function that validates this)
 
-
-  shuffleCards() {
+  shuffleCards(arr) {
     // use Fisher-Yates algorithm to shuffle deck
-    var i = this.cardDeck.length, j, temp;
-    while(--i > 0){
+    var i = arr.length, j, temp;
+    while(--i > 0) {
       j = Math.floor(Math.random()*(i+1));
-      temp = this.cardDeck[j];
-      this.cardDeck[j] = this.cardDeck[i];
-      this.cardDeck[i] = temp;
+      temp = arr[j];
+      arr[j] = arr[i];
+      arr[i] = temp;
     }
   }
 
   dealCards() {
     this.player1.hand = this.cardDeck.slice(0, 18);
     this.player2.hand = this.cardDeck.slice(18, 40);
-}
+  }
+
+
+  placeCard() {
+    this.centerPile.unshift(playedCard);
+     return this.centerPile;
+  }
 
   changePlayer() {
     if (this.currentPlayer === this.player1) {
@@ -36,10 +42,18 @@ class Game {
   }
 
   slapCard() {
+    // this will happen in main.js
     // recognize slap keydown for individual player, invoke validating function
   }
 
-  validSlap() {
+  validateSlap() {
+      if (this.centerPile[0] === 11 || this.centerPile[0] == this.centerPile[1] ||
+        this.centerPile[0] == this.centerPile[2]) {
+          this.currentPlayer.hand = this.currentPlayer.hand.concat(this.centerPile);
+          newGame.shuffleCards(this.currentPlayer.hand);
+          this.centerPile = [];
+          // now shuffle this
+        }
     // if conditional to determine if slap is valid and move centerPile to appropriate players deck
     // or remove index[0] of players deck and place at the back of opponent's deck
   }
