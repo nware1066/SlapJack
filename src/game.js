@@ -21,11 +21,11 @@ class Game {
   }
 
   createSuit(suitColor) {
-    var suit = [new Card(11, suitColor)];
-    // for (var i = 1; i <= 13; i++) {
-    //   var newCard = new Card(i, suitColor);
-    //   suit.push(newCard);
-    // }
+    var suit = [];
+    for (var i = 1; i <= 13; i++) {
+      var newCard = new Card(i, suitColor);
+      suit.push(newCard);
+    }
     return suit;
   }
 
@@ -41,8 +41,8 @@ class Game {
   }
 
   dealCards() {
-    this.player1.hand = this.cardDeck.slice(0, 2);
-    this.player2.hand = this.cardDeck.slice(2, 60);
+    this.player1.hand = this.cardDeck.slice(0, 26);
+    this.player2.hand = this.cardDeck.slice(26, 60);
   }
 
   playerTurn(player) {
