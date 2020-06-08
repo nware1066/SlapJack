@@ -7,6 +7,7 @@ class Game {
     this.suddenDeath = false;
     this.cardDeck = this.createDeck();
     this.centerPile = [];
+    this.header = "";
   }
 
   // when Player instantiates assign keys for deal and slap (or place this in function that validates this)
@@ -71,20 +72,35 @@ class Game {
     var card1 = this.centerPile[0] ? this.centerPile[0].value : "no card1";
     var card2 = this.centerPile[1] ? this.centerPile[1].value : "no card2";
     var card3 = this.centerPile[2] ? this.centerPile[2].value : "no card3";
-    var otherPlayer = this[player].id === 1 ? this.player2 : this.player1;
+    // var otherPlayer = this[player].id === 1 ? this.player2 : this.player1;
     var valid = card1 === 11 || card1 == card2 || card1 == card3;
+
     if (this.suddenDeath && card1 === 11 && otherPlayer.hand.length === 0) {
       this[player].wins++;
       this.playAgain();
     }
-    if (valid) {
-      this[player].hand = this[player].hand.concat(this.centerPile);
-      newGame.shuffleCards(this[player].hand);
-      this.centerPile = [];
+
+    if (card1 === 11) {
+      this.happySlap(this[player]);
+    } else if (card1 == card2) {
+      this.happySlap(this[player]);
+    } else if (card1 == card3) {
+      this.happySlap(this[player]);
     } else {
-      var penaltyCard = this[player].hand.pop();
-      otherPlayer.hand.push(penaltyCard);
+      this.sadSlap(this[player]);
     }
+  }
+
+  happySlap(player) {
+    player.hand = player.hand.concat(this.centerPile);
+    newGame.shuffleCards(player.hand);
+    this.centerPile = [];
+  }
+
+  sadSlap(player) {
+    var otherPlayer = player.id === 1 ? this.player2 : this.player1;
+    var penaltyCard = player.hand.pop();
+    otherPlayer.hand.push(penaltyCard);
   }
 
   placeCard(card) {
@@ -96,7 +112,9 @@ class Game {
   playAgain() {
     this.centerPile = [];
     this.player1.hand = [];
+    this.player1.isWinner = false;
     this.player2.hand = [];
+    this.player2.isWinner = false;
     this.suddenDeath = false;
     this.shuffleCards(this.cardDeck);
     this.dealCards();

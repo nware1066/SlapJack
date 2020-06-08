@@ -7,7 +7,9 @@ class Player {
 
   pickCard() {
     var playedCard = this.hand.pop();
-    return playedCard;
+    if (playedCard) {
+      return playedCard;
+    }
   }
 
   saveWins(){
