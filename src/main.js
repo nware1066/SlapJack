@@ -8,18 +8,19 @@ window.addEventListener("keydown", handleKeydown);
 
 
 function handleKeydown(event) {
-  console.log(event);
 
   if (event.key === "q") {
     newGame.playerTurn("player1");
 
   } else if (event.key === "f") {
+    // newGame.checkHand("player1");
     newGame.validateSlap("player1");
 
   } else if (event.key === "p") {
     newGame.playerTurn("player2");
 
   } else if (event.key === "j") {
+    // newGame.checkHand("player2");
     newGame.validateSlap("player2");
   }
   updateDisplay();
@@ -38,6 +39,7 @@ function updateDisplay() {
   const template = `
     <h3>Game</h3>
     <p>Current Player: ${newGame.currentPlayer.id}</p>
+    <p>Sudden Death: ${newGame.suddenDeath}</p>
     <p>Center Pile: ${newGame.centerPile.map(card => card.value)}</p>
     <p>Pile Length: ${newGame.centerPile.length}</p>
     <h3>Player 1</h3>
