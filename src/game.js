@@ -49,8 +49,13 @@ class Game {
     if (this[player] === this.currentPlayer) {
       var playedCard = this.currentPlayer.pickCard();
       this.placeCard(playedCard);
-      this.checkForSuddenDeath();
       this.changePlayer();
+    }
+  }
+
+  changePlayer() {
+    if (this.suddenDeath === false) {
+      this.currentPlayer = this.currentPlayer.id === 1 ? this.player2 : this.player1;
     }
   }
 
@@ -72,7 +77,6 @@ class Game {
       this[player].wins++;
       this.playAgain();
     }
-
     if (valid) {
       this[player].hand = this[player].hand.concat(this.centerPile);
       newGame.shuffleCards(this[player].hand);
@@ -81,7 +85,6 @@ class Game {
       var penaltyCard = this[player].hand.pop();
       otherPlayer.hand.push(penaltyCard);
     }
-    this.checkForSuddenDeath();
   }
 
   placeCard(card) {
@@ -90,15 +93,11 @@ class Game {
     }
   }
 
-  changePlayer() {
-    this.currentPlayer = this.currentPlayer.id === 1 ? this.player2 : this.player1;
-    // change currentPlayer after playCard
-  }
-
   playAgain() {
     this.centerPile = [];
     this.player1.hand = [];
     this.player2.hand = [];
+    this.suddenDeath = false;
     this.shuffleCards(this.cardDeck);
     this.dealCards();
     // winCount persists, game starts over

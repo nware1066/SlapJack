@@ -23,6 +23,7 @@ function handleKeydown(event) {
     // newGame.checkHand("player2");
     newGame.validateSlap("player2");
   }
+  newGame.checkForSuddenDeath();
   updateDisplay();
 }
 
