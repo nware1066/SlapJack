@@ -1,12 +1,13 @@
 class Player {
-  constructor() {
-    this.id = Date.now();
+  constructor(id) {
+    this.id = id;
     this.wins = 0;
     this.hand = [];
   }
 
-  playCard() {
-    // move handArray.length-1 from hand to centerPile
+  pickCard() {
+    var playedCard = this.hand.pop();
+    return playedCard;
   }
 
   saveWins(){
