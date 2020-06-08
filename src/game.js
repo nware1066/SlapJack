@@ -4,7 +4,6 @@ class Game {
     this.player1 = new Player(1);
     this.player2 = new Player(2);
     this.currentPlayer = this.player1;
-    this.opponent = this.player2;
     this.suddenDeath = false;
     this.cardDeck = this.createDeck();
     this.centerPile = [];
@@ -68,31 +67,22 @@ class Game {
     var card2 = this.centerPile[1] ? this.centerPile[1].value : "no card2";
     var card3 = this.centerPile[2] ? this.centerPile[2].value : "no card3";
     var otherPlayer = this[player].id === 1 ? this.player2 : this.player1;
-
+    var valid = card1 === 11 || card1 == card2 || card1 == card3;
     if (this.suddenDeath && card1 === 11 && otherPlayer.hand.length === 0) {
       this[player].wins++;
+      this.playAgain();
     }
 
-    if (card1 === 11 || card1 == card2 || card1 == card3) {
+    if (valid) {
       this[player].hand = this[player].hand.concat(this.centerPile);
       newGame.shuffleCards(this[player].hand);
       this.centerPile = [];
-      this.checkForSuddenDeath();
     } else {
       var penaltyCard = this[player].hand.pop();
       otherPlayer.hand.push(penaltyCard);
     }
+    this.checkForSuddenDeath();
   }
-
-  suddenDeath() {
-    var card1 = this.centerPile[0].value || "no card3";
-    var otherPlayer = this[player].id === 1 ? this.player2 : this.player1;
-
-    if (this.suddenDeath && card1 === 11 && otherPlayer.hand === 0) {
-      this[player].wins++;
-    }
-  }
-
 
   placeCard(card) {
     if (card) {
@@ -101,18 +91,16 @@ class Game {
   }
 
   changePlayer() {
-    var opponent = this.opponent;
-    this.opponent = this.currentPlayer;
-    this.currentPlayer = opponent;
+    this.currentPlayer = this.currentPlayer.id === 1 ? this.player2 : this.player1;
     // change currentPlayer after playCard
   }
 
-
-  updateWinCount() {
-    // increment count in innerText of winCount for player that wins game
-  }
-
   playAgain() {
+    this.centerPile = [];
+    this.player1.hand = [];
+    this.player2.hand = [];
+    this.shuffleCards(this.cardDeck);
+    this.dealCards();
     // winCount persists, game starts over
   }
 }
