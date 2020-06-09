@@ -105,7 +105,8 @@ class Game {
   winningSlap(player) {
     player.wins++;
     this.header = `PLAYER ${player.id} WINS!!!`;
-    setTimeout(this.playAgain, 3000);
+    this.playAgain();
+    // setTimeout(this.playAgain.bind(this), 3000);
   }
 
   placeCard(card) {
@@ -114,12 +115,12 @@ class Game {
     }
   }
 
-  playAgain = () => {
+  playAgain() {
     this.centerPile = [];
     this.player1.hand = [];
     this.player2.hand = [];
     this.suddenDeath = false;
-    this.header = "";
+    // this.header = "";
     this.shuffleCards(this.cardDeck);
     this.dealCards();
     updateHeader();

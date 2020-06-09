@@ -1,4 +1,5 @@
 var newGame = new Game;
+var timeout;
 // var playedCard;
 newGame.shuffleCards(newGame.cardDeck);
 newGame.dealCards();
@@ -8,7 +9,6 @@ window.addEventListener("keydown", handleKeydown);
 
 
 function handleKeydown(event) {
-  console.log(event);
   if (event.key === "q") {
     newGame.playerTurn("player1");
 
@@ -25,16 +25,20 @@ function handleKeydown(event) {
 
 
   updateDisplay();
-  updateHeader();
+  var headerElement = document.querySelector(".header");
+  if (newGame.header !== headerElement.innerText) {
+    updateHeader();
+  }
 }
 
 function updateHeader() {
+  clearTimeout(timeout);
   var headerElement = document.querySelector(".header");
   headerElement.innerText = newGame.header;
-  newGame.header = "";
-  setTimeout(function() {
-    headerElement.innerText = newGame.header;
-  }, 5000);
+   timeout = setTimeout(function() {
+    newGame.header = "";
+    headerElement.innerText = "";
+  }, 3000);
 }
 
 
