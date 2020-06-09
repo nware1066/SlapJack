@@ -72,35 +72,40 @@ class Game {
     var card1 = this.centerPile[0] ? this.centerPile[0].value : "no card1";
     var card2 = this.centerPile[1] ? this.centerPile[1].value : "no card2";
     var card3 = this.centerPile[2] ? this.centerPile[2].value : "no card3";
-    // var otherPlayer = this[player].id === 1 ? this.player2 : this.player1;
+    var otherPlayer = player.id === 1 ? this.player2 : this.player1;
     var valid = card1 === 11 || card1 == card2 || card1 == card3;
 
     if (this.suddenDeath && card1 === 11 && otherPlayer.hand.length === 0) {
-      this[player].wins++;
-      this.playAgain();
-    }
-
-    if (card1 === 11) {
-      this.happySlap(this[player]);
-    } else if (card1 == card2) {
-      this.happySlap(this[player]);
-    } else if (card1 == card3) {
-      this.happySlap(this[player]);
+      this.winningSlap(player);
+    } else if (card1 === 11 && !this.suddenDeath) {
+      this.happySlap(player, `SLAPJACK!, player ${player.id} takes the Pile!`);
+    } else if (card1 == card2 && !this.suddenDeath) {
+      this.happySlap(player, `PAIR!, player ${player.id} takes the Pile!`);
+    } else if (card1 == card3 && !this.suddenDeath) {
+      this.happySlap(player, `SANDWICH!, player ${player.id} takes the Pile!`);
     } else {
-      this.sadSlap(this[player]);
+      this.sadSlap(player);
     }
   }
 
-  happySlap(player) {
+  happySlap(player, slapType) {
+    this.header = slapType;
     player.hand = player.hand.concat(this.centerPile);
     newGame.shuffleCards(player.hand);
     this.centerPile = [];
   }
 
   sadSlap(player) {
+    this.header = `BAD SLAP, player ${player.id} forfeits a card!`
     var otherPlayer = player.id === 1 ? this.player2 : this.player1;
     var penaltyCard = player.hand.pop();
     otherPlayer.hand.push(penaltyCard);
+  }
+
+  winningSlap(player) {
+    player.wins++;
+    this.header = `PLAYER ${player.id} WINS!!!`;
+    setTimeout(this.playAgain, 3000);
   }
 
   placeCard(card) {
@@ -109,15 +114,16 @@ class Game {
     }
   }
 
-  playAgain() {
+  playAgain = () => {
     this.centerPile = [];
     this.player1.hand = [];
-    this.player1.isWinner = false;
     this.player2.hand = [];
-    this.player2.isWinner = false;
     this.suddenDeath = false;
+    this.header = "";
     this.shuffleCards(this.cardDeck);
     this.dealCards();
+    updateHeader();
+    updateDisplay();
     // winCount persists, game starts over
   }
 }

@@ -8,31 +8,35 @@ window.addEventListener("keydown", handleKeydown);
 
 
 function handleKeydown(event) {
-
+  console.log(event);
   if (event.key === "q") {
     newGame.playerTurn("player1");
 
   } else if (event.key === "f") {
-    // newGame.checkHand("player1");
-    newGame.validateSlap("player1");
+    newGame.validateSlap(newGame.player1);
 
   } else if (event.key === "p") {
     newGame.playerTurn("player2");
 
   } else if (event.key === "j") {
-    // newGame.checkHand("player2");
-    newGame.validateSlap("player2");
+    newGame.validateSlap(newGame.player2);
   }
   newGame.checkForSuddenDeath();
 
 
   updateDisplay();
+  updateHeader();
 }
 
 function updateHeader() {
-  var header = document.querySelector(".header");
-
+  var headerElement = document.querySelector(".header");
+  headerElement.innerText = newGame.header;
+  newGame.header = "";
+  setTimeout(function() {
+    headerElement.innerText = newGame.header;
+  }, 5000);
 }
+
 
 function updateDisplay() {
   var monitor = document.querySelector('.monitor');
