@@ -10,13 +10,13 @@ window.addEventListener("keydown", handleKeydown);
 
 function handleKeydown(event) {
   if (event.key === "q") {
-    newGame.playerTurn("player1");
+    newGame.playerTurn(newGame.player1);
 
   } else if (event.key === "f") {
     newGame.validateSlap(newGame.player1);
 
   } else if (event.key === "p") {
-    newGame.playerTurn("player2");
+    newGame.playerTurn(newGame.player2);
 
   } else if (event.key === "j") {
     newGame.validateSlap(newGame.player2);

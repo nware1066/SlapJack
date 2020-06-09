@@ -47,7 +47,7 @@ class Game {
   }
 
   playerTurn(player) {
-    if (this[player] === this.currentPlayer) {
+    if (player === this.currentPlayer) {
       var playedCard = this.currentPlayer.pickCard();
       this.placeCard(playedCard);
       this.changePlayer();
