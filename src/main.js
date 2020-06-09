@@ -1,4 +1,5 @@
 var newGame = new Game;
+var timeout;
 // var playedCard;
 newGame.shuffleCards(newGame.cardDeck);
 newGame.dealCards();
@@ -8,24 +9,46 @@ window.addEventListener("keydown", handleKeydown);
 
 
 function handleKeydown(event) {
-
   if (event.key === "q") {
-    newGame.playerTurn("player1");
+    newGame.playerTurn(newGame.player1);
 
   } else if (event.key === "f") {
-    // newGame.checkHand("player1");
-    newGame.validateSlap("player1");
+    newGame.validateSlap(newGame.player1);
 
   } else if (event.key === "p") {
-    newGame.playerTurn("player2");
+    newGame.playerTurn(newGame.player2);
 
   } else if (event.key === "j") {
-    // newGame.checkHand("player2");
-    newGame.validateSlap("player2");
+    newGame.validateSlap(newGame.player2);
   }
   newGame.checkForSuddenDeath();
+
+
   updateDisplay();
+  var headerElement = document.querySelector(".header");
+  if (newGame.header !== headerElement.innerText) {
+    updateHeader();
+  }
 }
+
+function updateHeader() {
+  clearTimeout(timeout);
+  var headerElement = document.querySelector(".header");
+  headerElement.innerText = newGame.header;
+   timeout = setTimeout(function() {
+    newGame.header = "";
+    headerElement.innerText = "";
+  }, 3000);
+}
+
+function updateWins() {
+  var player1WinCount = document.querySelector(".player1-winCount");
+  var player2WinCount = document.querySelector(".player2-winCount");
+  player1WinCount.innerText = `Wins ${newGame.player1.wins}`;
+  player2WinCount.innerText = `Wins ${newGame.player2.wins}`;
+}
+
+
 
 function updateDisplay() {
   var monitor = document.querySelector('.monitor');
@@ -44,11 +67,11 @@ function updateDisplay() {
     <p>Center Pile: ${newGame.centerPile.map(card => card.value)}</p>
     <p>Pile Length: ${newGame.centerPile.length}</p>
     <h3>Player 1</h3>
-    <p>Hand: ${newGame.player1.hand.map(card => card.value)}</p>
+    <p>Hand: ${newGame.player1.hand.map(card => card.value) || ""}</p>
     <p>Hand Length: ${newGame.player1.hand.length}</p>
     <p>Wins: ${newGame.player1.wins}</p>
     <h3>Player 2</h3>
-    <p>Hand: ${newGame.player2.hand.map(card => card.value)}</p>
+    <p>Hand: ${newGame.player2.hand.map(card => card.value) || ""}</p>
     <p>Length: ${newGame.player2.hand.length}</p>
     <p>Wins: ${newGame.player2.wins}</p>
     <hr/>
