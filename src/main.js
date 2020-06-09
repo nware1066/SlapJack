@@ -41,6 +41,14 @@ function updateHeader() {
   }, 3000);
 }
 
+function updateWins() {
+  var player1WinCount = document.querySelector(".player1-winCount");
+  var player2WinCount = document.querySelector(".player2-winCount");
+  player1WinCount.innerText = `Wins ${newGame.player1.wins}`;
+  player2WinCount.innerText = `Wins ${newGame.player2.wins}`;
+}
+
+
 
 function updateDisplay() {
   var monitor = document.querySelector('.monitor');

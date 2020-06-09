@@ -123,6 +123,7 @@ class Game {
     // this.header = "";
     this.shuffleCards(this.cardDeck);
     this.dealCards();
+    updateWins();
     updateHeader();
     updateDisplay();
     // winCount persists, game starts over
