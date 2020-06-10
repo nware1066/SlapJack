@@ -38,7 +38,9 @@ I have designed a webpage from the ground up, using HTML5, CSS and plain Javascr
 
 
 <br />
+
 ![image of bad slap page](/readmePictures/badslap.png)
+
 <br />
 
 
@@ -46,7 +48,9 @@ I have designed a webpage from the ground up, using HTML5, CSS and plain Javascr
 - During the final mode of gameplay, if the current player slaps a Jack, the game is over and that player wins, which will be displayed on screen. If the other player slaps on a Jack, the cards in the center pile are placed in that player's hand and gameplay resumes.
 
 <br />
+
 ![image of playerWins page](/readmePictures/playerWins.png)
+
 <br />
 
 - A banner will appear above the cards to inform the players of slaps and wins.
