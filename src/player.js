@@ -1,7 +1,7 @@
 class Player {
   constructor(id) {
     this.id = id;
-    this.wins = 0;
+    this.wins = JSON.parse(localStorage.getItem(`player${this.id}WinCount`)) || 0;
     this.hand = [];
   }
 
@@ -12,7 +12,8 @@ class Player {
     }
   }
 
-  saveWins(){
-    // increment and add win to local storage
+  saveWins() {
+    var stringifiedPlayerWinCount = JSON.stringify(this.wins);
+    localStorage.setItem(`player${this.id}WinCount`, stringifiedPlayerWinCount);
   }
 }

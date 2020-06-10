@@ -1,4 +1,3 @@
-
 class Game {
   constructor() {
     this.player1 = new Player(1);
@@ -10,7 +9,6 @@ class Game {
     this.header = "";
   }
 
-  // when Player instantiates assign keys for deal and slap (or place this in function that validates this)
   createDeck() {
     var deck = [];
     var suitColors = ["red", "gold", "green", "blue"];
@@ -31,7 +29,6 @@ class Game {
   }
 
   shuffleCards(arr) {
-    // use Fisher-Yates algorithm to shuffle deck
     var i = arr.length, j, temp;
     while(--i > 0) {
       j = Math.floor(Math.random()*(i+1));
@@ -61,11 +58,7 @@ class Game {
   }
 
   checkForSuddenDeath() {
-    if (this.player1.hand.length === 0 || this.player2.hand.length === 0) {
-      this.suddenDeath = true;
-    } else {
-      this.suddenDeath = false;
-    }
+    this.suddenDeath = this.player1.hand.length === 0 || this.player2.hand.length === 0;
   }
 
   validateSlap(player) {
@@ -104,9 +97,9 @@ class Game {
 
   winningSlap(player) {
     player.wins++;
+    player.saveWins();
     this.header = `PLAYER ${player.id} WINS!!!`;
     this.playAgain();
-    // setTimeout(this.playAgain.bind(this), 3000);
   }
 
   placeCard(card) {
@@ -120,12 +113,10 @@ class Game {
     this.player1.hand = [];
     this.player2.hand = [];
     this.suddenDeath = false;
-    // this.header = "";
     this.shuffleCards(this.cardDeck);
     this.dealCards();
-    updateWins();
     updateHeader();
     updateDisplay();
-    // winCount persists, game starts over
+    updateWins();
   }
 }
