@@ -4,9 +4,7 @@ updateWins();
 newGame.shuffleCards(newGame.cardDeck);
 newGame.dealCards();
 
-
 window.addEventListener("keydown", handleKeydown);
-
 
 function handleKeydown(event) {
   if (event.key === "q") {
