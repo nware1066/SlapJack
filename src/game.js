@@ -109,7 +109,6 @@ class Game {
     player.saveWins();
     this.header = `PLAYER ${player.id} WINS!!!`;
     this.playAgain();
-    // setTimeout(this.playAgain.bind(this), 3000);
   }
 
   placeCard(card) {
@@ -123,12 +122,12 @@ class Game {
     this.player1.hand = [];
     this.player2.hand = [];
     this.suddenDeath = false;
-    // this.header = "";
     this.shuffleCards(this.cardDeck);
     this.dealCards();
-    updateWins();
     updateHeader();
     updateDisplay();
+    updateWins();
+
     // winCount persists, game starts over
   }
 }
