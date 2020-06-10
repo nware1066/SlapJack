@@ -116,7 +116,6 @@ class Game {
     this.shuffleCards(this.cardDeck);
     this.dealCards();
     updateHeader();
-    updateDisplay();
     updateWins();
   }
 }
