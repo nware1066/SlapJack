@@ -19,10 +19,36 @@ I have designed a webpage from the ground up, using HTML5, CSS and plain Javascr
 - When the window loads, the deck is shuffled and split between the two players
 - Players will altenate turns, with neither player being able to place a card if it is not their turn.
 - Players place a turn by pressing the key associated with that player's turn.
-- When the cards being played reveal a Jack, two cards of the same value in a row, or two cards of the same value separated by a different card, players have the opportunity to gain cards by pressing the key associated with that player's "slap".
+- When the cards being played reveal a Jack, two cards of the same value in a row, or two cards of the same value separated by a different card, players have the opportunity to gain cards by pressing the key associated with that player's "slap".  
+
+
+<br />
+
+![image of slapjack page](/readmePictures/slapjack.png)
+
+<br />
+
+
+
+<br />
+
+![image of pair page](/readmePictures/pair.png)
+
 - If a player slaps at any other time, a card is removed from that player's hand and placed in the other player's hand.
+
+
+<br />
+![image of bad slap page](/readmePictures/badslap.png)
+<br />
+
+
 - When one player is out of cards, the alternating play restriction is removed and the player who has cards will place cards one at a time until the game ends. If the player runs out of cards before a winner is declared, the center pile will go into that player's hand and shuffle for continued play.
 - During the final mode of gameplay, if the current player slaps a Jack, the game is over and that player wins, which will be displayed on screen. If the other player slaps on a Jack, the cards in the center pile are placed in that player's hand and gameplay resumes.
+
+<br />
+![image of playerWins page](/readmePictures/playerWins.png)
+<br />
+
 - A banner will appear above the cards to inform the players of slaps and wins.
 
 ## WINS

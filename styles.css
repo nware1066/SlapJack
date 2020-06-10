@@ -1,10 +1,16 @@
-header {
-  text-align: center;
-  color: lightgreen;
-  font-size: 32px;
-  margin-top: 50px;
+body {
+  background: linear-gradient(#e66465, #9198e5);
+  background-repeat: no-repeat;
+  height: 100vh;
 }
 
+header {
+  text-align: center;
+  color: black;
+  font-size: 32px;
+  margin-top: 50px;
+  height: 20px;
+}
 
 main {
   display: flex;
@@ -12,17 +18,18 @@ main {
 }
 
 .card-pile {
-margin-top: 50px;
-height: 200px;
-width: 120px;
-border: 3px solid black;
-background: slategrey;
-}
-.card-img {
-  height: 200px;
-  width: 120px;
+  margin-top: 50px;
+  height: 400px;
+  width: 240px;
+  border: 3px solid black;
+  background: slategrey;
 }
 
-.hand-1 {
-  
+.card-img {
+  height: 400px;
+  width: 240px;
+}
+
+.player1-winCount, .player2-winCount {
+  font-size: 30px;
 }
