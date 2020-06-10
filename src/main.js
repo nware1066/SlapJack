@@ -20,7 +20,6 @@ function handleKeydown(event) {
   }
 
   newGame.checkForSuddenDeath();
-  updateDisplay();
   updateCenterPile();
   updateHeader();
 }
@@ -53,27 +52,3 @@ function updateCenterPile() {
     centerCardImage.src = `./assets/blank.png`;
   }
 }
-
-function updateDisplay() {
-  var monitor = document.querySelector('.monitor');
-  const template = `
-    <h3>Game</h3>
-    <p>Current Player: ${newGame.currentPlayer.id}</p>
-    <p>Sudden Death: ${newGame.suddenDeath}</p>
-    <p>Center Pile: ${newGame.centerPile.map(card => card.value)}</p>
-    <p>Pile Length: ${newGame.centerPile.length}</p>
-    <h3>Player 1</h3>
-    <p>Hand: ${newGame.player1.hand.map(card => card.value) || ""}</p>
-    <p>Hand Length: ${newGame.player1.hand.length}</p>
-    <p>Wins: ${newGame.player1.wins}</p>
-    <h3>Player 2</h3>
-    <p>Hand: ${newGame.player2.hand.map(card => card.value) || ""}</p>
-    <p>Length: ${newGame.player2.hand.length}</p>
-    <p>Wins: ${newGame.player2.wins}</p>
-    <hr/>
-  `;
-  monitor.insertAdjacentHTML('afterbegin', template);
-}
-// var playedCard = newGame.currentPlayer.pickCard();
-// newGame.placeCard(playedCard);
-// console.log(newGame)
