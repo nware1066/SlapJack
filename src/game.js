@@ -1,4 +1,6 @@
 
+// var playerwins = JSON.parse(localStorage.getItem("playerWinCount"));
+
 class Game {
   constructor() {
     this.player1 = new Player(1);
@@ -104,6 +106,7 @@ class Game {
 
   winningSlap(player) {
     player.wins++;
+    player.saveWins();
     this.header = `PLAYER ${player.id} WINS!!!`;
     this.playAgain();
     // setTimeout(this.playAgain.bind(this), 3000);

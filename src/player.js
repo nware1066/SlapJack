@@ -13,6 +13,10 @@ class Player {
   }
 
   saveWins(){
+    var stringifiedPlayerWinCount = JSON.stringify(`Wins ${this.wins}`);
+    // var stringifiedPlayer2WinCount = JSON.stringify(player2winCount);
+      localStorage.setItem("playerWinCount", stringifiedPlayerWinCount);
+      // localStorage.setItem("player2WinCount", stringifiedPlayer2WinCount);
     // increment and add win to local storage
   }
 }
