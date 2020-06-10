@@ -21,13 +21,14 @@ function handleKeydown(event) {
 
   newGame.checkForSuddenDeath();
   updateDisplay();
+  updateCenterPile();
   updateHeader();
 }
 
 function updateHeader() {
-  clearTimeout(timeout);
   var headerElement = document.querySelector(".header");
   if (newGame.header !== headerElement.innerText) {
+    clearTimeout(timeout);
     headerElement.innerText = newGame.header;
     timeout = setTimeout(function() {
       newGame.header = "";
