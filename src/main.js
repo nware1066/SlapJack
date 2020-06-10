@@ -1,7 +1,6 @@
 var newGame = new Game;
-updateWins();
 var timeout;
-// var playedCard;
+updateWins();
 newGame.shuffleCards(newGame.cardDeck);
 newGame.dealCards();
 
@@ -12,34 +11,29 @@ window.addEventListener("keydown", handleKeydown);
 function handleKeydown(event) {
   if (event.key === "q") {
     newGame.playerTurn(newGame.player1);
-
   } else if (event.key === "f") {
     newGame.validateSlap(newGame.player1);
-
   } else if (event.key === "p") {
     newGame.playerTurn(newGame.player2);
-
   } else if (event.key === "j") {
     newGame.validateSlap(newGame.player2);
   }
+
   newGame.checkForSuddenDeath();
-
-
   updateDisplay();
-  var headerElement = document.querySelector(".header");
-  if (newGame.header !== headerElement.innerText) {
-    updateHeader();
-  }
+  updateHeader();
 }
 
 function updateHeader() {
   clearTimeout(timeout);
   var headerElement = document.querySelector(".header");
-  headerElement.innerText = newGame.header;
-   timeout = setTimeout(function() {
-    newGame.header = "";
-    headerElement.innerText = "";
-  }, 3000);
+  if (newGame.header !== headerElement.innerText) {
+    headerElement.innerText = newGame.header;
+    timeout = setTimeout(function() {
+      newGame.header = "";
+      headerElement.innerText = "";
+    }, 3000);
+  }
 }
 
 function updateWins() {
@@ -49,18 +43,7 @@ function updateWins() {
   player2WinCount.innerText = `Wins ${newGame.player2.wins}`;
 }
 
-// function noWins(score) {
-//   if (score === null) {
-//     return "Wins 0"
-//   } else {
-//     return score;
-//   }
-// }
-
-
-
-function updateDisplay() {
-  var monitor = document.querySelector('.monitor');
+function updateCenterPile() {
   var topCard = newGame.centerPile[0];
   var centerCardImage = document.querySelector('.center-pile .card-img');
   if (topCard) {
@@ -68,7 +51,10 @@ function updateDisplay() {
   } else {
     centerCardImage.src = `./assets/blank.png`;
   }
-    updateWins();
+}
+
+function updateDisplay() {
+  var monitor = document.querySelector('.monitor');
   const template = `
     <h3>Game</h3>
     <p>Current Player: ${newGame.currentPlayer.id}</p>
